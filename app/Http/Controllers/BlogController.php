@@ -46,7 +46,7 @@ class BlogController extends Controller
             'youtube_video_link' => $request->youtube_video_link,
         ]);
 
-        return redirect()->route('blogsbyrankothcj.index')->with('success', 'Blog created successfully.');
+        return redirect()->route('blogs.index')->with('success', 'Blog created successfully.');
     }
 
     /**
@@ -99,7 +99,7 @@ class BlogController extends Controller
             'youtube_video_link' => $request->youtube_video_link,
             'image' => $blog->image,
         ]);
-        return redirect()->route('blogsbyrankothcj.index')->with('success', 'Blog updated successfully.');
+        return redirect()->route('blogs.index')->with('success', 'Blog updated successfully.');
     }
 
     /**
@@ -108,6 +108,6 @@ class BlogController extends Controller
     public function destroy($blogId)
     {
         Blog::find($blogId)->delete();
-        return redirect()->route('blogsbyrankothcj.index')->with('success', 'Blog deleted successfully.');
+        return redirect()->route('blogs.index')->with('success', 'Blog deleted successfully.');
     }
 }
