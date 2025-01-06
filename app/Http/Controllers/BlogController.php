@@ -12,6 +12,13 @@ class BlogController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function __construct()
+    {
+        if (Auth::check() && auth()->user()->email !== 'agency@example.com') {
+            echo "Error 403: Unauthorized Access, please go back...!";
+            exit;
+        }
+    }
     public function index()
     {
         $blogs = Blog::all();
@@ -37,8 +44,14 @@ class BlogController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:10240',
             'youtube_video_link' => 'nullable|url',
         ]);
-
-        $imagePath = $request->file('image') ? $request->file('image')->store('blogs', 'public') : null;
+        $imagePath = null;
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $customPath = '/var/www/html/motomarket/public/storage/blogs';
+            $imageName = uniqid() . '_' . $image->getClientOriginalName();
+            $image->move($customPath, $imageName);
+            $imagePath = 'blogs/' . $imageName;
+        }
         Blog::create([
             'title' => $request->title,
             'content' => $request->content,
@@ -46,7 +59,7 @@ class BlogController extends Controller
             'youtube_video_link' => $request->youtube_video_link,
         ]);
 
-        return redirect()->route('blogs.index')->with('success', 'Blog created successfully.');
+        return redirect()->route('blogsbyrankothcj.index')->with('success', 'Blog created successfully.');
     }
 
     /**
@@ -85,11 +98,11 @@ class BlogController extends Controller
             'youtube_video_link' => 'nullable|url',
         ]);
         if ($request->file('image')) {
-            // Delete old image if exists
-            if ($blog->image) {
-                Storage::disk('public')->delete($blog->image);
-            }
-            $blog->image = $request->file('image')->store('blogs', 'public');
+            $image = $request->file('image');
+            $customPath = '/var/www/html/motomarket/public/storage/blogs';
+            $imageName = uniqid() . '_' . $image->getClientOriginalName();
+            $image->move($customPath, $imageName);
+            $blog->image = 'blogs/' . $imageName;
         }
 
         // $blog->update($request->all());
@@ -99,7 +112,7 @@ class BlogController extends Controller
             'youtube_video_link' => $request->youtube_video_link,
             'image' => $blog->image,
         ]);
-        return redirect()->route('blogs.index')->with('success', 'Blog updated successfully.');
+        return redirect()->route('blogsbyrankothcj.index')->with('success', 'Blog updated successfully.');
     }
 
     /**
@@ -108,6 +121,6 @@ class BlogController extends Controller
     public function destroy($blogId)
     {
         Blog::find($blogId)->delete();
-        return redirect()->route('blogs.index')->with('success', 'Blog deleted successfully.');
+        return redirect()->route('blogsbyrankothcj.index')->with('success', 'Blog deleted successfully.');
     }
 }
