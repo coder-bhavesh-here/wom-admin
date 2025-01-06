@@ -12,13 +12,6 @@ class BlogController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function __construct()
-    {
-        if (Auth::check() && auth()->user()->email !== 'agency@example.com') {
-            echo "Error 403: Unauthorized Access, please go back...!";
-            exit;
-        }
-    }
     public function index()
     {
         $blogs = Blog::all();
