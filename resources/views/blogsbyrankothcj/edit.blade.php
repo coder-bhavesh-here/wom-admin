@@ -35,8 +35,8 @@
                                 id="image" class="form-control" onchange="previewImage(event)">
 
                             @if (isset($blog->image))
-                                <img src="{{ asset('storage/' . $blog->image) }}" alt="Blog Image" class="mt-2"
-                                    style="max-width: 150px;" id="preImage">
+                                <img src="http://92.205.108.194/wom-admin/public/storage/".{{ $blog->image }}"
+                                    alt="Blog Image" class="mt-2" style="max-width: 150px;" id="preImage">
                             @endif
                             <div id="imagePreview" class="mt-2">
                                 <!-- Preview will be displayed here -->
