@@ -2,7 +2,7 @@
     <input type="hidden" id="content_val" value="{{ old('content', $blog->content ?? '') }}">
     <x-slot name="header">
         <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-            <x-nav-link :href="route('blogs.index')" :active="request()->routeIs('blogsbyrankothcj.index')">
+            <x-nav-link :href="route('blogs.index')" :active="request()->routeIs('blogs.index')">
                 {{ __('Blogs') }}
             </x-nav-link>
         </div>
