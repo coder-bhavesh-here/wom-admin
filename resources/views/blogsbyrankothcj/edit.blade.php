@@ -11,13 +11,28 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
             <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <h1>{{ isset($blog) ? 'Edit Blog' : 'Create Blog' }}</h1>
+                <h1>{{ isset($blog) ? 'Edit Blog/FAQ' : 'Create Blog/FAQ' }}</h1>
                 <form action="{{ isset($blog) ? route('blogs.update', $blog->id) : route('blogs.store') }}" method="POST"
                     enctype="multipart/form-data">
                     @csrf
                     @if (isset($blog))
                         @method('PUT')
                     @endif
+
+                    <div class="flex items-center mt-4">
+                        <div class="w-1/6">
+                            Blog/FAQ
+                        </div>
+                        <div class="w-5/6">
+                            <select name="is_faq" id="is_faq" style="width: 100px;" class="rounded p-2">
+                                <option value="0" {{ isset($blog) && !$blog->is_faq ? 'selected' : '' }}>Blog
+                                </option>
+                                <option value="1" {{ isset($blog) && $blog->is_faq ? 'selected' : '' }}>FAQ
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <hr>
 
                     <div class="flex items-center mt-4">
                         <div class="w-1/6">

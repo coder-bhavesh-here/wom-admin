@@ -54,6 +54,7 @@ class BlogController extends Controller
         }
         Blog::create([
             'title' => $request->title,
+            'is_faq' => (int)$request->is_faq,
             'content' => $request->content,
             'image' => $imagePath,
             'youtube_video_link' => $request->youtube_video_link,
@@ -108,6 +109,7 @@ class BlogController extends Controller
         // $blog->update($request->all());
         $blog->update([
             'title' => $request->title,
+            'is_faq' => (int)$request->is_faq,
             'content' => $request->content,
             'youtube_video_link' => $request->youtube_video_link,
             'image' => $blog->image,
