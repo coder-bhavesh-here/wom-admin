@@ -112,12 +112,12 @@
                     <x-dropdown-link href="{{ route('profile.show') }}">
                         {{ Auth::user()->name }}
                     </x-dropdown-link>
+
                     <form method="POST" action="{{ route('logout') }}" x-data>
                         @csrf
-
-                        <x-dropdown-link href="{{ route('logout') }}" @click.prevent="$root.submit();">
+                        <x-nav-link href="{{ route('logout') }}" @click.prevent="$root.submit();">
                             {{ __('Logout') }}
-                        </x-dropdown-link>
+                        </x-nav-link>
                     </form>
 
                 </div>
@@ -183,7 +183,7 @@
                     @csrf
 
                     <x-responsive-nav-link href="{{ route('logout') }}" @click.prevent="$root.submit();">
-                        {{ __('Log Out') }}
+                        {{ __('Logout') }}
                     </x-responsive-nav-link>
                 </form>
 
