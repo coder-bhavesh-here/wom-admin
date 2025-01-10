@@ -18,7 +18,7 @@ class AdminMiddleware
     {
         if (auth()->check() && auth()->user()->email !== 'cj@motomob.tech') {
             Session::flush();
-            return redirect('/login')->with('error', 'Inappropriate credentials.');;
+            return redirect('/login')->with('error', 'Inappropriate credentials.');
         }
 
         return $next($request);

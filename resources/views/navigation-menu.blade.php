@@ -110,12 +110,9 @@
                         {{ Auth::user()->name }}
                     </x-dropdown-link>
 
-                    <form method="POST" action="{{ route('logout') }}" x-data>
-                        @csrf
-                        <x-nav-link href="{{ route('logout') }}" @click.prevent="$root.submit();">
-                            {{ __('Logout') }}
-                        </x-nav-link>
-                    </form>
+                    <x-nav-link href="{{ route('custom-logout') }}">
+                        {{ __('Logout') }}
+                    </x-nav-link>
 
                 </div>
             </div>
@@ -176,13 +173,10 @@
                 @endif
 
                 <!-- Authentication -->
-                <form method="POST" action="{{ route('logout') }}" x-data>
-                    @csrf
 
-                    <x-responsive-nav-link href="{{ route('logout') }}" @click.prevent="$root.submit();">
-                        {{ __('Logout') }}
-                    </x-responsive-nav-link>
-                </form>
+                <x-responsive-nav-link href="{{ route('custom-logout') }}">
+                    {{ __('Logout') }}
+                </x-responsive-nav-link>
 
                 <!-- Team Management -->
                 @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
