@@ -10,9 +10,10 @@ Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
+    'admin'
 ])->group(function () {
     Route::get('/dashboard', function () {
-        return view('dashboard');
+        return redirect()->route('blogs.index');
     })->name('dashboard');
     Route::resource('blogs', BlogController::class);
 });
