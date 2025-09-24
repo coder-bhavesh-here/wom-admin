@@ -18,6 +18,6 @@ Route::middleware([
     'verified',
     'admin'
 ])->group(function () {
-    Route::get('/dashboard', HomeController::class, 'index')->name('dashboard');
+    Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
     Route::resource('blogs', BlogController::class);
 });
