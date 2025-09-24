@@ -19,5 +19,6 @@ Route::middleware([
     'admin'
 ])->group(function () {
     Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
+    Route::get('/bookings', [HomeController::class, 'index'])->name('bookings');
     Route::resource('blogs', BlogController::class);
 });
