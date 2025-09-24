@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 
@@ -17,8 +18,6 @@ Route::middleware([
     'verified',
     'admin'
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return redirect()->route('blogs.index');
-    })->name('dashboard');
+    Route::get('/dashboard', HomeController::class, 'index')->name('dashboard');
     Route::resource('blogs', BlogController::class);
 });
